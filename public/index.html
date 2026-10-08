@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chevrolet Corsa Maxx 1.4 2008 Branco // Venda & Apresentação Cinematográfica</title>
+  <meta name="description" content="Apresentação cinematográfica interativa e venda exclusiva do Chevrolet Corsa Hatch Maxx 1.4 8V Econoflex 2008 Branco Summit. Impecável, revisado e completo.">
+  <link rel="stylesheet" href="style.css">
+  <!-- GSAP & Lenis CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Feather Icons / Lucide -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div id="preloader">
+    <div class="loader-badge">GM • CINEMATIC REVEAL</div>
+    <h1 class="loader-title">CHEVROLET CORSA MAXX 1.4</h1>
+    <div class="loader-bar-track">
+      <div class="loader-bar-fill" id="loader-fill"></div>
+    </div>
+    <div class="loader-progress" id="loader-text">CARREGANDO FRAMES: 0 / 165</div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a href="#cinematic-experience" class="nav-brand">
+      <div class="brand-bow-badge">
+        <svg viewBox="0 0 24 24"><path d="M4 10h16v4H4z M9 7h6v10H9z"/></svg>
+      </div>
+      <span class="brand-text">CORSA // MAXX</span>
+      <span class="brand-sub">1.4 ECONOFLEX</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#cinematic-experience" class="nav-link">Cinema 360°</a></li>
+      <li><a href="#especificacoes" class="nav-link">Dossiê Técnico</a></li>
+      <li><a href="#diferenciais" class="nav-link">Opcionais</a></li>
+      <li><a href="#galeria" class="nav-link">Galeria 4K</a></li>
+      <li><a href="#simulador" class="nav-link">Simular Financiamento</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="audio-btn" id="audio-toggle" title="Ativar Áudio Ambiente">
+        <i data-lucide="volume-x" id="audio-icon"></i>
+      </button>
+      <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Tenho%20interesse%20no%20Chevrolet%20Corsa%20Maxx%201.4%202008%20Branco." target="_blank" class="cta-pill">
+        <span>R$ 26.900</span>
+        <i data-lucide="arrow-up-right" style="width: 16px; height: 16px;"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- CINEMATIC CANVAS SCRUBBER SECTION -->
+  <section id="cinematic-experience">
+    <div class="pinned-canvas-container">
+      <canvas id="frame-canvas" width="1280" height="720"></canvas>
+      <div class="cinema-vignette"></div>
+      <div class="letterbox-bar letterbox-top"></div>
+      <div class="letterbox-bar letterbox-bottom"></div>
+
+      <!-- HUD OVERLAY -->
+      <div class="cinema-hud">
+        <!-- Top Status & Takes Switcher -->
+        <div class="hud-top">
+          <div class="hud-pill">
+            <span class="hud-dot"></span>
+            <span>PUBLICIDADE CINEMATOGRÁFICA // 4K 60FPS</span>
+          </div>
+
+          <div class="hud-take-selector">
+            <button class="take-btn active" data-take="1" id="btn-take-1">
+              <span>01</span> APRESENTAÇÃO (2s)
+            </button>
+            <button class="take-btn" data-take="2" id="btn-take-2">
+              <span>02</span> ZOOM DETALHES (1.5s)
+            </button>
+            <button class="take-btn" data-take="3" id="btn-take-3">
+              <span>03</span> TRASEIRA (2s)
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Story Cards Overlay during scrub -->
+        <div class="hud-center">
+          <!-- Card Take 1 -->
+          <div class="story-card visible" id="card-take-1">
+            <div class="story-card-inner">
+              <div class="card-label">Take 01 // Apresentação & Presença Visual</div>
+              <h2 class="card-title">ÍCONE NACIONAL. ROBUSTEZ INCOMPARÁVEL.</h2>
+              <p class="card-desc">Chevrolet Corsa Hatch Maxx 1.4 8V Econoflex 2008 na cor Branco Summit. Alinhamento de carroceria impecável, pintura reluzente e suspensão firme e silenciosa.</p>
+            </div>
+          </div>
+
+          <!-- Card Take 2 -->
+          <div class="story-card" id="card-take-2">
+            <div class="story-card-inner">
+              <div class="card-label">Take 02 // Macro Zoom & Acabamento Frontal</div>
+              <h2 class="card-title">PRECISÃO EM CADA DETALHE & IDENTIDADE GM.</h2>
+              <p class="card-desc">Conjunto óptico cristalino biparábola, grade frontal cromada com o lendário emblema gravata dourada GM e capô com vincos refinados de fábrica.</p>
+            </div>
+          </div>
+
+          <!-- Card Take 3 -->
+          <div class="story-card" id="card-take-3">
+            <div class="story-card-inner">
+              <div class="card-label">Take 03 // Perspectiva Traseira & Assinatura</div>
+              <h2 class="card-title">DESIGN ATEMPORAL & ERGONOMIA COMPLETA.</h2>
+              <p class="card-desc">Lanternas traseiras verticais icônicas de alta visibilidade, limpador e desembaçador traseiro e badge original 'CORSA MAXX 1.4 Econoflex'.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Telemetry HUD & CTAs -->
+        <div class="hud-bottom">
+          <div class="hud-telemetry">
+            <div class="tele-item">
+              <span class="tele-label">Frame</span>
+              <span class="tele-val" id="hud-frame-num">001 / 165</span>
+            </div>
+            <div class="tele-item">
+              <span class="tele-label">Tempo Take</span>
+              <span class="tele-val" id="hud-time">00:00.0s</span>
+            </div>
+            <div class="tele-item">
+              <span class="tele-label">Motorização</span>
+              <span class="tele-val">1.4 8V 105cv</span>
+            </div>
+            <div class="tele-item">
+              <span class="tele-label">Cor Oficial</span>
+              <span class="tele-val">Branco Summit</span>
+            </div>
+          </div>
+
+          <div class="scroll-hint">
+            <span>Role para explorar os takes</span>
+            <i data-lucide="chevron-down" style="width: 16px; height: 16px;"></i>
+          </div>
+
+          <button class="play-commercial-btn" id="open-video-btn">
+            <i data-lucide="play" style="width: 14px; height: 14px; fill: currentColor;"></i>
+            <span>Assistir Comercial (5.5s)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNICAL DOSSIER / SPECIFICATIONS -->
+  <section id="especificacoes" class="content-section">
+    <div class="section-header">
+      <div class="section-meta">Dossiê de Engenharia // GM do Brasil</div>
+      <h2 class="section-title">DESEMPENHO CONSAGRADO & MANUTENÇÃO ACESSÍVEL</h2>
+    </div>
+
+    <div class="spec-grid">
+      <div class="spec-card">
+        <div class="spec-icon"><i data-lucide="zap"></i></div>
+        <div class="spec-big-num">105<span class="spec-unit">CV</span></div>
+        <div class="spec-name">Potência Máxima</div>
+        <div class="spec-detail">Motor Família I Econoflex com calibração precisa, resposta ágil em arrancadas e retomadas seguras.</div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon"><i data-lucide="gauge"></i></div>
+        <div class="spec-big-num">13.4<span class="spec-unit">kgfm</span></div>
+        <div class="spec-name">Torque Imediato</div>
+        <div class="spec-detail">Disponível em rotações baixas (2.800 rpm), garantindo condução prazerosa na cidade sem necessidade de reduções constantes.</div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon"><i data-lucide="shield-check"></i></div>
+        <div class="spec-big-num">100<span class="spec-unit">%</span></div>
+        <div class="spec-name">Laudo Cautelar Aprovado</div>
+        <div class="spec-detail">Estrutura 100% íntegra, sem sinistros, sem leilão, lacrado de frente e traseira com longarinas originais.</div>
+      </div>
+
+      <div class="spec-card">
+        <div class="spec-icon"><i data-lucide="milestone"></i></div>
+        <div class="spec-big-num">2008<span class="spec-unit">/ 2008</span></div>
+        <div class="spec-name">Ano & Modelo</div>
+        <div class="spec-detail">Geração consagrada do Corsa Hatch (frente Montana), referência em espaço interno e durabilidade.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES & EQUIPMENT BENTO GRID -->
+  <section id="diferenciais" class="content-section">
+    <div class="section-header">
+      <div class="section-meta">Equipamentos & Conforto</div>
+      <h2 class="section-title">CONFIGURAÇÃO COMPLETA PARA O SEU DIA A DIA</h2>
+    </div>
+
+    <div class="bento-grid">
+      <div class="bento-card bento-span-2">
+        <div>
+          <div class="card-label">Climatização & Direção</div>
+          <h3 class="bento-title">Ar-Condicionado Gélido & Direção Hidráulica Leve</h3>
+          <p class="bento-desc">Sistema de ar condicionado revisado com filtro de cabine novo, resfriando a cabine rapidamente mesmo em dias quentes. Direção hidráulica progressiva que facilita manobras em vagas apertadas e oferece total precisão em rodovias.</p>
+        </div>
+        <div class="bento-tag-list">
+          <span class="bento-tag">Ar Condicionado 100% Funcional</span>
+          <span class="bento-tag">Direção Hidráulica</span>
+          <span class="bento-tag">Ventilação 4 Velocidades</span>
+        </div>
+      </div>
+
+      <div class="bento-card">
+        <div>
+          <div class="card-label">Segurança & Conveniência</div>
+          <h3 class="bento-title">Vidros & Travas Elétricas</h3>
+          <p class="bento-desc">Vidros dianteiros com acionamento elétrico e descida expressa, travamento central das portas e alarme perimétrico original integrado.</p>
+        </div>
+        <div class="bento-tag-list">
+          <span class="bento-tag">Vidros Elétricos</span>
+          <span class="bento-tag">Travas Elétricas</span>
+          <span class="bento-tag">Alarme GM</span>
+        </div>
+      </div>
+
+      <div class="bento-card">
+        <div>
+          <div class="card-label">Rodagem & Suspensão</div>
+          <h3 class="bento-title">Pneus Novos Pirelli</h3>
+          <p class="bento-desc">Quatro pneus novos montados e balanceados em rodas aro 14" com calotas originais Chevrolet Maxx impecáveis.</p>
+        </div>
+        <div class="bento-tag-list">
+          <span class="bento-tag">Pneus Novos</span>
+          <span class="bento-tag">Geometria Revisada</span>
+        </div>
+      </div>
+
+      <div class="bento-card bento-span-2">
+        <div>
+          <div class="card-label">Documentação & Procedência</div>
+          <h3 class="bento-title">Documentação 100% Cristalina // Pronto para Transferir</h3>
+          <p class="bento-desc">IPVA 2026 integralmente pago, licenciamento em dia, sem multas, sem débitos e sem alienação fiduciária. Acompanha manual do proprietário original e chave reserva. Transferência imediata pelo aplicativo da CDT.</p>
+        </div>
+        <div class="bento-tag-list">
+          <span class="bento-tag">IPVA 2026 Pago</span>
+          <span class="bento-tag">Manual do Proprietário</span>
+          <span class="bento-tag">Chave Reserva</span>
+          <span class="bento-tag">Transferência Digital</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE 4K GALLERY -->
+  <section id="galeria" class="content-section">
+    <div class="section-header">
+      <div class="section-meta">Inspeção Visual // Alta Resolução</div>
+      <h2 class="section-title">DETALHAMENTO CINEMATOGRÁFICO</h2>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item" onclick="openPhotoModal('images/take1_apresentacao.jpg', 'Take 01: Apresentação Dianteira 3/4')">
+        <img src="images/take1_apresentacao.jpg" alt="Chevrolet Corsa Maxx 1.4 Dianteira" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-label">TAKE 01 // 2.0s</span>
+          <span class="gallery-caption">Visão Hero Dianteira 3/4</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" onclick="openPhotoModal('images/take2_zoom.jpg', 'Take 02: Macro Detalhes Grade & Farol')">
+        <img src="images/take2_zoom.jpg" alt="Chevrolet Corsa Maxx 1.4 Farol e Grade" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-label">TAKE 02 // 1.5s</span>
+          <span class="gallery-caption">Macro Zoom Conjunto Óptico</span>
+        </div>
+      </div>
+
+      <div class="gallery-item" onclick="openPhotoModal('images/take3_traseira.jpg', 'Take 03: Traseira Comercial')">
+        <img src="images/take3_traseira.jpg" alt="Chevrolet Corsa Maxx 1.4 Traseira" loading="lazy">
+        <div class="gallery-overlay">
+          <span class="gallery-label">TAKE 03 // 2.0s</span>
+          <span class="gallery-caption">Traseira Esguia & Lanternas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINANCING SIMULATOR -->
+  <section id="simulador" class="content-section">
+    <div class="section-header">
+      <div class="section-meta">Facilidade de Negociação</div>
+      <h2 class="section-title">SIMULADOR DE FINANCIAMENTO EM TEMPO REAL</h2>
+    </div>
+
+    <div class="calc-wrapper">
+      <div class="calc-controls">
+        <div class="calc-control">
+          <div class="calc-label-row">
+            <span class="calc-label">Valor de Entrada:</span>
+            <span class="calc-value-display" id="entry-val-text">R$ 8.000</span>
+          </div>
+          <input type="range" min="3000" max="20000" step="500" value="8000" class="calc-slider" id="entry-slider">
+        </div>
+
+        <div class="calc-control">
+          <div class="calc-label-row">
+            <span class="calc-label">Número de Parcelas:</span>
+            <span class="calc-value-display" id="term-text">36 vezes</span>
+          </div>
+          <div class="terms-selector">
+            <button class="term-chip" data-months="12">12x</button>
+            <button class="term-chip" data-months="24">24x</button>
+            <button class="term-chip active" data-months="36">36x</button>
+            <button class="term-chip" data-months="48">48x</button>
+          </div>
+        </div>
+
+        <p style="color: var(--text-dim); font-size: 0.82rem; line-height: 1.5;">*Simulação estimada sujeita a análise de crédito bancária por CPF. Aceita entrada facilitada no cartão de crédito em até 18x ou troca por moto/carro.</p>
+      </div>
+
+      <div class="calc-result-box">
+        <div class="result-badge">• PARCELA ESTIMADA</div>
+        <div class="result-amount" id="monthly-val">R$ 738<span style="font-size: 1rem; color: var(--text-muted);">/mês</span></div>
+        <div class="result-sub" id="result-summary">Entrada de R$ 8.000 + 36 parcelas fixas</div>
+        <a href="#" id="calc-whatsapp-btn" target="_blank" class="whatsapp-cta-btn">
+          <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i>
+          <span>Enviar Proposta com essa Simulação</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div>
+        <h3 style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem;">CHEVROLET CORSA MAXX 1.4 2008</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">Cor Branco Summit • Impecável • Disponível para visitação imediata</p>
+      </div>
+      <div>
+        <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); text-align: right; margin-bottom: 4px;">VALOR À VISTA</div>
+        <div class="footer-price-tag">R$ 26.900</div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2008-2026 Chevrolet Corsa Maxx 1.4 Showcase Cinematográfico.</span>
+      <span>Projeto desenvolvido com Lenis, GSAP ScrollTrigger e WebGL Canvas.</span>
+    </div>
+  </footer>
+
+  <!-- VIDEO MODAL -->
+  <div class="video-modal" id="video-modal">
+    <div class="modal-container">
+      <button class="modal-close-btn" id="close-video-btn">
+        <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+      </button>
+      <video class="modal-video-player" id="modal-video" controls playsinline>
+        <source src="video/corsa_maxx_commercial.mp4" type="video/mp4">
+        Seu navegador não suporta a reprodução deste vídeo.
+      </video>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

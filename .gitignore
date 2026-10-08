@@ -1,0 +1,5 @@
+node_modules/
+*.log
+temp_*
+test_*.png
+.DS_Store
